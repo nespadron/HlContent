@@ -9,9 +9,12 @@ let lenis = null;
 
 if (typeof Lenis === 'function') {
   lenis = new Lenis({
-    duration: 1.15,
+    duration: 1.5,                 // glide más largo = movimiento más suave
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
+    wheelMultiplier: 0.8,          // cada giro de rueda avanza menos (menos "brincos")
+    touchMultiplier: 1.4,
+    syncTouch: true,               // mismo suavizado en móvil
   });
   lenis.on('scroll', ScrollTrigger.update);
   lenis.on('scroll', ({ progress }) => { bar.style.width = (progress * 100).toFixed(2) + '%'; });
@@ -29,7 +32,7 @@ if (typeof Lenis === 'function') {
 
 /* ===== ESCENA 1 + 2 · El Encuadre ===== */
 const tl = gsap.timeline({
-  scrollTrigger: { trigger: '#top', start: 'top top', end: '+=220%', scrub: 1, pin: true, anticipatePin: 1 },
+  scrollTrigger: { trigger: '#top', start: 'top top', end: '+=260%', scrub: 1.2, pin: true, anticipatePin: 1 },
 });
 tl.to('#line1', { opacity: 0, y: -40, duration: 0.6 }, 0.0)
   .to('#scrollHint', { opacity: 0, duration: 0.3 }, 0.0)
@@ -48,7 +51,7 @@ tl.to('#line1', { opacity: 0, y: -40, duration: 0.6 }, 0.0)
 
 /* ===== ESCENA 3 · El guion se escribe ===== */
 const tl3 = gsap.timeline({
-  scrollTrigger: { trigger: '#proceso', start: 'top top', end: '+=160%', scrub: 1, pin: '#scriptPage', anticipatePin: 1 },
+  scrollTrigger: { trigger: '#proceso', start: 'top top', end: '+=200%', scrub: 1.2, pin: true, anticipatePin: 1 },
 });
 tl3.from('.script__slug', { opacity: 0, y: 10, duration: 0.3 }, 0.0)
    .from('.script__eyebrow', { opacity: 0, y: 10, duration: 0.3 }, 0.08)
@@ -58,9 +61,12 @@ tl3.from('.script__slug', { opacity: 0, y: 10, duration: 0.3 }, 0.0)
 /* ===== ESCENA 4 · ¿Quiénes somos? (revelado palabra por palabra) ===== */
 gsap.to('.about__text .w', {
   opacity: 1,
-  stagger: 0.4,
+  stagger: 0.5,
   ease: 'none',
-  scrollTrigger: { trigger: '#nosotros', start: 'top 70%', end: 'bottom 65%', scrub: 1 },
+  scrollTrigger: {
+    trigger: '#nosotros', start: 'top top', end: '+=140%',
+    scrub: 1.2, pin: true, anticipatePin: 1,
+  },
 });
 
 /* ===== ESCENA 5 · El montaje (scroll horizontal de clientes) ===== */
@@ -71,8 +77,8 @@ if (track) {
     x: () => -distance(),
     ease: 'none',
     scrollTrigger: {
-      trigger: '#clientes', start: 'top top', end: () => '+=' + distance(),
-      scrub: 1, pin: '.clients__pin', anticipatePin: 1, invalidateOnRefresh: true,
+      trigger: '#clientes', start: 'top top', end: () => '+=' + distance() * 1.3,
+      scrub: 1.2, pin: '.clients__pin', anticipatePin: 1, invalidateOnRefresh: true,
     },
   });
 }
