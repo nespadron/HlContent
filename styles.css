@@ -210,6 +210,81 @@ body {
   100% { opacity: 0; transform: translateY(12px); }
 }
 
+/* --- ESCENA 3 · El guion --- */
+.script {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12vh 24px;
+  background:
+    radial-gradient(120% 80% at 50% 0%, #16110d 0%, var(--bg) 60%);
+}
+.script__page {
+  width: min(760px, 100%);
+  background: var(--bg-soft);
+  border: 1px solid rgba(244, 240, 233, 0.09);
+  border-radius: 6px;
+  padding: clamp(28px, 5vw, 56px);
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.script__slug {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  padding-bottom: 16px;
+  margin-bottom: 28px;
+  border-bottom: 1px dashed rgba(244, 240, 233, 0.14);
+}
+.script__eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+.script__intro {
+  font-size: clamp(15px, 1.7vw, 18px);
+  line-height: 1.75;
+  color: var(--cream);
+  margin-bottom: 40px;
+}
+.steps { list-style: none; }
+.step {
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(244, 240, 233, 0.08);
+  /* estado inicial: oculto y "sin escribir" (recortado a la izquierda) */
+  opacity: 0;
+  transform: translateY(14px);
+  clip-path: inset(0 100% 0 0);
+}
+.step:last-child { border-bottom: 1px solid rgba(244, 240, 233, 0.08); }
+.step__n {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 700;
+  min-width: 26px;
+}
+.step__t {
+  font-size: clamp(17px, 2.4vw, 26px);
+  color: var(--cream);
+  letter-spacing: 0.01em;
+}
+.caret {
+  display: inline-block;
+  width: 10px;
+  height: 1.05em;
+  margin-left: 6px;
+  background: var(--accent);
+  transform: translateY(2px);
+  animation: blink 1.05s steps(1) infinite;
+}
+
 /* --- Sección puente --- */
 .next {
   min-height: 100vh;

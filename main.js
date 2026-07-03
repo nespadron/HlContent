@@ -20,6 +20,7 @@ if (typeof Lenis === 'function') {
   });
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
+  window.lenis = lenis;
 } else {
   console.warn('Lenis no disponible: usando scroll nativo.');
   const updateBar = () => {
@@ -86,6 +87,34 @@ tl.to('.vf-reticle', {
 tl.call(() => { document.getElementById('focusLabel').textContent = 'ENFOCADO'; }, null, 0.9)
   .to('.vf-reticle', { borderColor: 'rgba(94,202,165,1)', duration: 0.2 }, 0.9)
   .to('#line2', { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.9);
+
+// --- ESCENA 3 · El guion se escribe ---
+// La página se fija y cada paso se "escribe" (wipe izq->der) al ritmo del scroll.
+const tl3 = gsap.timeline({
+  scrollTrigger: {
+    trigger: '#script',
+    start: 'top top',
+    end: '+=160%',
+    scrub: 1,
+    pin: '#scriptPage',
+    anticipatePin: 1,
+  },
+});
+
+// La intro y el encabezado entran suave
+tl3.from('.script__slug', { opacity: 0, y: 10, duration: 0.3 }, 0.0)
+   .from('.script__eyebrow', { opacity: 0, y: 10, duration: 0.3 }, 0.08)
+   .from('.script__intro', { opacity: 0, y: 14, duration: 0.5 }, 0.14);
+
+// Cada paso se escribe: aparece el recorte de izquierda a derecha
+tl3.to('.step', {
+  opacity: 1,
+  y: 0,
+  clipPath: 'inset(0 0% 0 0)',
+  duration: 0.6,
+  stagger: 0.5,
+  ease: 'power2.out',
+}, 0.4);
 
 // Refresca medidas cuando todo cargó (fuentes, imagen)
 window.addEventListener('load', () => ScrollTrigger.refresh());
