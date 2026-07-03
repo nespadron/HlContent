@@ -83,30 +83,24 @@ if (track) {
   });
 }
 
-/* ===== ESCENA 6 · Impacto (contador que sube, se tacha y da paso al mensaje) ===== */
+/* ===== ESCENA 6 · Impacto (pineada: cuenta, se tacha y da paso al mensaje) ===== */
 const counter = { v: 0 };
 const numEl = document.getElementById('impactNum');
-const meter = document.querySelector('.impact__meter');
 
-// 1) El número de "seguidores" sube al entrar (métrica de vanidad)
-gsap.to(counter, {
-  v: 128400, ease: 'power1.out',
-  onUpdate: () => { numEl.textContent = Math.round(counter.v).toLocaleString('es-MX'); },
-  scrollTrigger: { trigger: '#impacto', start: 'top 65%', end: 'center 60%', scrub: 0.6 },
-});
-
-// 2) Se tacha (clase CSS) y aparece el mensaje real
-ScrollTrigger.create({
-  trigger: '#impacto', start: 'center 58%',
-  onEnter: () => meter.classList.add('struck'),
-  onLeaveBack: () => meter.classList.remove('struck'),
-});
 gsap.timeline({
-  scrollTrigger: { trigger: '#impacto', start: 'center 60%', end: 'center 28%', scrub: 0.8 },
+  scrollTrigger: { trigger: '#impacto', start: 'top top', end: '+=200%', scrub: 1.2, pin: true, anticipatePin: 1 },
 })
-  .to('#impactNum', { color: 'rgba(138,134,128,0.45)', duration: 0.4 }, 0)
-  .fromTo('#impactPunch', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 0.15)
-  .fromTo('.impact__text', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 0.4);
+  // 1) El número de "seguidores" sube (métrica de vanidad)
+  .to(counter, {
+    v: 128400, ease: 'power1.out',
+    onUpdate: () => { numEl.textContent = Math.round(counter.v).toLocaleString('es-MX'); },
+  }, 0)
+  // 2) Se tacha y se apaga el número
+  .to('.impact__strike', { scaleX: 1, duration: 0.4, ease: 'power2.inOut' }, 0.55)
+  .to('#impactNum', { color: 'rgba(138,134,128,0.45)', duration: 0.4 }, 0.55)
+  // 3) Aparece el mensaje real
+  .fromTo('#impactPunch', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 0.7)
+  .fromTo('.impact__text', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 0.95);
 
 /* ===== ESCENA 7 · CTA ===== */
 gsap.from('.cta__inner > *', {
