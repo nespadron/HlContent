@@ -1,0 +1,246 @@
+:root {
+  --bg: #0a0a0b;
+  --bg-soft: #121214;
+  --cream: #f4f0e9;
+  --muted: #8a8680;
+  --accent: #e0592f;
+  --line: rgba(244, 240, 233, 0.85);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* --- Barra de progreso superior --- */
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: rgba(244, 240, 233, 0.08);
+  z-index: 100;
+}
+.progress span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+}
+
+/* --- ESCENA · La etapa fija --- */
+.stage {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+.stage__inner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* Retrato en bruto */
+.portrait {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: min(78vw, 620px);
+  height: min(82vh, 760px);
+  transform: translate(-50%, -50%) scale(1.12);
+  border-radius: 4px;
+  overflow: hidden;
+  filter: blur(22px) grayscale(1) brightness(0.72) contrast(1.05);
+  will-change: filter, transform;
+}
+.portrait img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.portrait__grain {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 3px);
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* --- Visor de cámara --- */
+.viewfinder {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(80vw, 660px);
+  height: min(84vh, 800px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vf-corner {
+  position: absolute;
+  width: 34px; height: 34px;
+  border: 2px solid var(--line);
+  opacity: 0;
+}
+.vf-corner.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.vf-corner.tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.vf-corner.bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.vf-corner.br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+/* Retícula de tercios */
+.vf-grid { position: absolute; inset: 0; }
+.vf-grid span {
+  position: absolute;
+  background: rgba(244, 240, 233, 0.22);
+  transform: scaleX(0);
+  transform-origin: center;
+}
+.vf-grid span:nth-child(1) { left: 33.33%; top: 0; bottom: 0; width: 1px; transform: scaleY(0); }
+.vf-grid span:nth-child(2) { left: 66.66%; top: 0; bottom: 0; width: 1px; transform: scaleY(0); }
+.vf-grid span:nth-child(3) { top: 33.33%; left: 0; right: 0; height: 1px; transform: scaleX(0); }
+.vf-grid span:nth-child(4) { top: 66.66%; left: 0; right: 0; height: 1px; transform: scaleX(0); }
+
+/* Retícula central de enfoque */
+.vf-reticle {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 70px; height: 70px;
+  margin: -35px 0 0 -35px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1.6);
+}
+.vf-reticle::before,
+.vf-reticle::after {
+  content: '';
+  position: absolute;
+  background: var(--accent);
+}
+.vf-reticle::before { top: 50%; left: -8px; right: -8px; height: 1px; margin-top: -0.5px; }
+.vf-reticle::after { left: 50%; top: -8px; bottom: -8px; width: 1px; margin-left: -0.5px; }
+
+/* HUD del visor */
+.vf-hud {
+  position: absolute;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--cream);
+  opacity: 0;
+}
+.vf-hud--tl { top: -26px; left: 2px; }
+.vf-hud--tr { top: -26px; right: 2px; color: var(--accent); }
+.vf-hud--bl { bottom: -26px; left: 2px; color: var(--muted); }
+.vf-hud--br { bottom: -26px; right: 2px; color: var(--muted); }
+
+.rec { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); }
+.rec i {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0.15; } }
+
+/* --- Titulares --- */
+.copy {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 0 24px;
+  mix-blend-mode: difference;
+}
+.copy__line {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 7vw, 5.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.copy__line--accent {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-style: italic;
+  opacity: 0;
+}
+
+/* --- Pista de scroll --- */
+.scroll-hint {
+  position: absolute;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  z-index: 6;
+}
+.scroll-hint__mouse {
+  width: 22px; height: 34px;
+  border: 1.5px solid var(--muted);
+  border-radius: 12px;
+  position: relative;
+}
+.scroll-hint__mouse i {
+  position: absolute;
+  top: 6px; left: 50%;
+  width: 3px; height: 6px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--cream);
+  animation: scrollDot 1.6s var(--ease) infinite;
+}
+@keyframes scrollDot {
+  0% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  60% { opacity: 1; transform: translateY(10px); }
+  100% { opacity: 0; transform: translateY(12px); }
+}
+
+/* --- Sección puente --- */
+.next {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+  background: var(--bg-soft);
+}
+.next__eyebrow {
+  font-size: 12px; letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+.next__title {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 5.5vw, 4rem);
+  line-height: 1.05;
+}
+.next__sub {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait { filter: none; transform: translate(-50%, -50%); }
+  .rec i, .scroll-hint__mouse i { animation: none; }
+}

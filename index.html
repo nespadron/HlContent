@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HL Content — El Encuadre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Barra de progreso del scroll -->
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- ESCENA 1 + 2 · El Encuadre (una sola etapa fija que se transforma al scrollear) -->
+  <section class="stage" id="stage">
+    <div class="stage__inner">
+
+      <!-- El retrato: empieza en bruto (desenfocado, sin color) y se enfoca -->
+      <div class="portrait" id="portrait">
+        <img
+          src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1200&auto=format&fit=crop"
+          alt="Retrato de un profesional" />
+        <div class="portrait__grain" aria-hidden="true"></div>
+      </div>
+
+      <!-- El visor de cámara que se dibuja alrededor -->
+      <div class="viewfinder" id="viewfinder" aria-hidden="true">
+        <span class="vf-corner tl"></span>
+        <span class="vf-corner tr"></span>
+        <span class="vf-corner bl"></span>
+        <span class="vf-corner br"></span>
+
+        <div class="vf-grid">
+          <span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="vf-reticle"></div>
+
+        <div class="vf-hud vf-hud--tl">
+          <span class="rec"><i></i>REC</span>
+        </div>
+        <div class="vf-hud vf-hud--tr" id="focusLabel">ENFOCANDO…</div>
+        <div class="vf-hud vf-hud--bl">HL·CONTENT</div>
+        <div class="vf-hud vf-hud--br">f/1.8 · 24mm</div>
+      </div>
+
+      <!-- Titulares que se relevan con el scroll -->
+      <div class="copy">
+        <h1 class="copy__line" id="line1">Tu marca personal<br />ya existe.</h1>
+        <h1 class="copy__line copy__line--accent" id="line2">Falta enfocarla.</h1>
+      </div>
+
+    </div>
+
+    <!-- Pista de scroll (solo visible al inicio) -->
+    <div class="scroll-hint" id="scrollHint">
+      <span>Desliza</span>
+      <div class="scroll-hint__mouse"><i></i></div>
+    </div>
+  </section>
+
+  <!-- Sección puente (para comprobar que la etapa se libera bien) -->
+  <section class="next">
+    <p class="next__eyebrow">Escena 3 · próximamente</p>
+    <h2 class="next__title">Ahora que está enfocado,<br />se escribe el guion.</h2>
+    <p class="next__sub">Este es el final del prototipo de las escenas 1 y 2.</p>
+  </section>
+
+  <!-- Librerías -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
