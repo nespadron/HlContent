@@ -102,26 +102,23 @@ gsap.timeline({
   .fromTo('#impactPunch', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 0.7)
   .fromTo('.impact__text', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 0.95);
 
-/* ===== ESCENA 7 · CTA ===== */
-gsap.from('.cta__inner > *', {
-  opacity: 0, y: 40, duration: 0.8, stagger: 0.12, ease: 'power2.out',
-  scrollTrigger: { trigger: '#contacto', start: 'top 60%' },
-});
+/* ===== ESCENA 7 · CTA (pineada: mismo ritmo que el resto) ===== */
+gsap.timeline({
+  scrollTrigger: { trigger: '#contacto', start: 'top top', end: '+=130%', scrub: 1.2, pin: true, anticipatePin: 1 },
+})
+  .from('.cta__inner > *', { opacity: 0, y: 44, stagger: 0.35, ease: 'power2.out' });
 
-/* ===== ESCENA 8 · Lead magnet ===== */
-gsap.from('#leadCard', {
-  opacity: 0, y: 60, scale: 0.96, duration: 0.9, ease: 'power2.out',
-  scrollTrigger: { trigger: '#recurso', start: 'top 70%' },
-});
-gsap.from('.lead__num span', {
-  scale: 0.4, opacity: 0, duration: 1, ease: 'back.out(1.7)',
-  scrollTrigger: { trigger: '#recurso', start: 'top 60%' },
-});
+/* ===== ESCENA 8 · Lead magnet (pineada) ===== */
+gsap.timeline({
+  scrollTrigger: { trigger: '#recurso', start: 'top top', end: '+=130%', scrub: 1.2, pin: true, anticipatePin: 1 },
+})
+  .from('#leadCard', { opacity: 0, y: 60, scale: 0.96, ease: 'power2.out', duration: 0.8 }, 0)
+  .from('.lead__num span', { scale: 0.4, opacity: 0, ease: 'back.out(1.7)', duration: 0.8 }, 0.25);
 
-/* ===== ESCENA 9 · Footer ===== */
+/* ===== ESCENA 9 · Newsletter + footer (revelado atado al scroll, sin pin) ===== */
 gsap.from('#footerNews > *', {
-  opacity: 0, y: 30, duration: 0.7, stagger: 0.12, ease: 'power2.out',
-  scrollTrigger: { trigger: '#footer', start: 'top 75%' },
+  opacity: 0, y: 30, stagger: 0.4, ease: 'power2.out',
+  scrollTrigger: { trigger: '#footer', start: 'top 85%', end: 'top 40%', scrub: 1.2 },
 });
 
 // Refresca medidas cuando todo cargó (fuentes)
