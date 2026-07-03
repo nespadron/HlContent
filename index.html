@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HL Content — El Encuadre</title>
+  <title>HL Content — Marcas personales que dejan huella</title>
+  <meta name="description" content="Agencia especializada en la creación y desarrollo de marcas personales en redes sociales y plataformas de entretenimiento." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -11,59 +12,63 @@
 </head>
 <body>
 
-  <!-- Barra de progreso del scroll -->
+  <!-- Barra de progreso -->
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 
-  <!-- ESCENA 1 + 2 · El Encuadre (una sola etapa fija que se transforma al scrollear) -->
-  <section class="stage" id="stage">
+  <!-- Header -->
+  <header class="header" id="header">
+    <a href="#top" class="brand">HL<span>·</span>Content</a>
+    <nav class="header__nav">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#recurso">Recurso gratis</a>
+      <a href="#contacto" class="btn btn--sm">Agenda una llamada</a>
+    </nav>
+  </header>
+
+  <!-- ================= ESCENA 1 + 2 · El Encuadre ================= -->
+  <section class="stage" id="top">
     <div class="stage__inner">
 
-      <!-- El retrato: empieza en bruto (desenfocado, sin color) y se enfoca -->
-      <div class="portrait" id="portrait">
-        <img
-          src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1200&auto=format&fit=crop"
-          alt="Retrato de un profesional" />
-        <div class="portrait__grain" aria-hidden="true"></div>
+      <!-- Visual: un "reel" en bruto que se enfoca (sin foto de terceros) -->
+      <div class="reel" id="heroVisual">
+        <div class="reel__aurora"></div>
+        <div class="reel__grain"></div>
+        <div class="reel__ui">
+          <span class="reel__play"></span>
+          <span class="reel__bar"><i></i></span>
+        </div>
       </div>
 
-      <!-- El visor de cámara que se dibuja alrededor -->
+      <!-- Visor de cámara -->
       <div class="viewfinder" id="viewfinder" aria-hidden="true">
         <span class="vf-corner tl"></span>
         <span class="vf-corner tr"></span>
         <span class="vf-corner bl"></span>
         <span class="vf-corner br"></span>
-
-        <div class="vf-grid">
-          <span></span><span></span><span></span><span></span>
-        </div>
-
+        <div class="vf-grid"><span></span><span></span><span></span><span></span></div>
         <div class="vf-reticle"></div>
-
-        <div class="vf-hud vf-hud--tl">
-          <span class="rec"><i></i>REC</span>
-        </div>
+        <div class="vf-hud vf-hud--tl"><span class="rec"><i></i>REC</span></div>
         <div class="vf-hud vf-hud--tr" id="focusLabel">ENFOCANDO…</div>
         <div class="vf-hud vf-hud--bl">HL·CONTENT</div>
         <div class="vf-hud vf-hud--br">f/1.8 · 24mm</div>
       </div>
 
-      <!-- Titulares que se relevan con el scroll -->
+      <!-- Titulares -->
       <div class="copy">
         <h1 class="copy__line" id="line1">Tu marca personal<br />ya existe.</h1>
         <h1 class="copy__line copy__line--accent" id="line2">Falta enfocarla.</h1>
       </div>
-
     </div>
 
-    <!-- Pista de scroll (solo visible al inicio) -->
     <div class="scroll-hint" id="scrollHint">
       <span>Desliza</span>
       <div class="scroll-hint__mouse"><i></i></div>
     </div>
   </section>
 
-  <!-- ESCENA 3 · El guion se escribe (¿Qué hacemos?) -->
-  <section class="script" id="script">
+  <!-- ================= ESCENA 3 · El guion (¿Qué hacemos?) ================= -->
+  <section class="script" id="proceso">
     <div class="script__page" id="scriptPage">
       <div class="script__slug">INT. TU MARCA PERSONAL — DÍA</div>
       <p class="script__eyebrow">¿Qué hacemos?</p>
@@ -72,24 +77,126 @@
         codo con nuestros clientes para aportar valor y entretener a su audiencia. Un
         acompañamiento integral en todas las etapas del proceso creativo:
       </p>
-
       <ol class="steps">
         <li class="step"><span class="step__n">01</span><span class="step__t">Concepción de ideas</span></li>
         <li class="step"><span class="step__n">02</span><span class="step__t">Escritura de guiones</span></li>
         <li class="step"><span class="step__n">03</span><span class="step__t">Planeación estratégica</span></li>
         <li class="step"><span class="step__n">04</span><span class="step__t">Producción</span></li>
         <li class="step"><span class="step__n">05</span><span class="step__t">Edición</span></li>
-        <li class="step"><span class="step__n">06</span><span class="step__t">Gestión de la comunidad<span class="caret" id="caret"></span></span></li>
+        <li class="step"><span class="step__n">06</span><span class="step__t">Gestión de la comunidad<span class="caret"></span></span></li>
       </ol>
     </div>
   </section>
 
-  <!-- Sección puente temporal (marca el fin de lo construido) -->
-  <section class="next">
-    <p class="next__eyebrow">Escena 4 · próximamente</p>
-    <h2 class="next__title">Y así, el montaje<br />cobra vida.</h2>
-    <p class="next__sub">Fin de lo construido hasta ahora — seguimos poco a poco.</p>
+  <!-- ================= ESCENA 4 · ¿Quiénes somos? ================= -->
+  <section class="about" id="nosotros">
+    <div class="about__inner" id="aboutInner">
+      <p class="about__eyebrow">¿Quiénes somos?</p>
+      <p class="about__text">
+        <span class="w">Somos una agencia especializada en la creación y desarrollo de</span>
+        <span class="w hl">marcas personales</span>
+        <span class="w">en redes sociales y plataformas de entretenimiento.</span>
+        <span class="w">Trabajamos con profesionales que buscan compartir su conocimiento,</span>
+        <span class="w">transmitir valor y generar un</span>
+        <span class="w hl">impacto positivo</span>
+        <span class="w">en la sociedad mediante contenido de valor.</span>
+      </p>
+    </div>
   </section>
+
+  <!-- ================= ESCENA 5 · El montaje (¿Clientes?) ================= -->
+  <section class="clients" id="clientes">
+    <div class="clients__pin" id="clientsPin">
+      <div class="clients__head">
+        <p class="clients__eyebrow">¿Quiénes son nuestros clientes?</p>
+        <h2 class="clients__title">Profesionales que ya<br />tienen algo que decir.</h2>
+      </div>
+      <div class="clients__track" id="clientsTrack">
+        <article class="clip"><span class="clip__n">01</span><h3>Médicos</h3></article>
+        <article class="clip"><span class="clip__n">02</span><h3>Políticos</h3></article>
+        <article class="clip"><span class="clip__n">03</span><h3>Abogados</h3></article>
+        <article class="clip"><span class="clip__n">04</span><h3>Arquitectos</h3></article>
+        <article class="clip"><span class="clip__n">05</span><h3>Contadores</h3></article>
+        <article class="clip"><span class="clip__n">06</span><h3>Emprendedores</h3></article>
+        <article class="clip"><span class="clip__n">07</span><h3>Agentes</h3></article>
+        <article class="clip"><span class="clip__n">08</span><h3>Ejecutivos</h3></article>
+        <article class="clip"><span class="clip__n">09</span><h3>Directores<br />de empresa</h3></article>
+        <article class="clip clip--end">
+          <p>Todos buscan potenciar su impacto a través de una marca personal sólida en redes sociales.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ESCENA 6 · ¿Seguidores? (impacto) ================= -->
+  <section class="impact" id="impacto">
+    <div class="impact__inner" id="impactInner">
+      <p class="impact__eyebrow">¿Garantizan tener muchos seguidores?</p>
+      <div class="impact__meter">
+        <span class="impact__num" id="impactNum">0</span>
+        <span class="impact__label" id="impactLabel">seguidores</span>
+      </div>
+      <h2 class="impact__punch" id="impactPunch">No se trata del número.<br />Se trata del <em>impacto</em>.</h2>
+      <p class="impact__text">
+        Nuestro enfoque no está en la cantidad de seguidores, sino en el impacto que puedes
+        generar. Combinamos tu personalidad única y tu experiencia profesional para crear
+        contenido que aporte valor y transforme vidas. Los seguidores llegan como consecuencia
+        de un contenido auténtico y poderoso; el objetivo real es construir una marca personal
+        sólida y significativa.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= ESCENA 7 · Costo / CTA ================= -->
+  <section class="cta" id="contacto">
+    <div class="cta__inner" id="ctaInner">
+      <p class="cta__eyebrow">¿Cuál es el costo de nuestros servicios?</p>
+      <p class="cta__text">
+        Cada servicio está diseñado a la medida de cada cliente, para adaptarse a sus objetivos
+        y necesidades específicas.
+      </p>
+      <h2 class="cta__title">Agenda una videollamada<br /><span>sin compromiso.</span></h2>
+      <p class="cta__sub">Hablaremos sobre tu estrategia y cómo podemos ayudarte.</p>
+      <a href="#" class="btn btn--lg" data-todo="URL de agenda (Calendly / WhatsApp)">Agendar ahora</a>
+    </div>
+  </section>
+
+  <!-- ================= ESCENA 8 · Lead magnet ================= -->
+  <section class="lead" id="recurso">
+    <div class="lead__card" id="leadCard">
+      <div class="lead__badge">Descarga gratis</div>
+      <div class="lead__grid">
+        <div class="lead__num"><span>5</span></div>
+        <div class="lead__body">
+          <h2 class="lead__title">Mis 5 mejores consejos para crear un video viral</h2>
+          <p class="lead__sub">La guía que usamos con nuestros clientes para arrancar con el pie derecho.</p>
+          <a href="#" class="btn btn--lg" data-todo="Producto Shopify del lead magnet">Lo quiero gratis</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ESCENA 9 · Newsletter + Footer ================= -->
+  <footer class="footer" id="footer">
+    <div class="footer__news" id="footerNews">
+      <h2 class="footer__title">Suscríbete a mi Newsletter</h2>
+      <form class="footer__form" onsubmit="return false;" data-todo="Conectar a Shopify/Mailchimp">
+        <input type="email" placeholder="Correo electrónico" aria-label="Correo electrónico" required />
+        <button type="submit" class="btn">Suscribirme</button>
+      </form>
+    </div>
+
+    <div class="footer__bottom">
+      <a href="#top" class="brand brand--footer">HL<span>·</span>Content</a>
+      <nav class="footer__social" aria-label="Redes sociales">
+        <a href="https://www.instagram.com/halloleuteproject/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+        <a href="https://www.tiktok.com/@emilio.pego" target="_blank" rel="noopener" aria-label="TikTok">TikTok</a>
+        <a href="https://youtube.com/@emiliopego" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
+        <a href="https://www.facebook.com/profile.php?id=100089831797195" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+      </nav>
+      <p class="footer__legal">© 2026, HL Content</p>
+    </div>
+  </footer>
 
   <!-- Librerías -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

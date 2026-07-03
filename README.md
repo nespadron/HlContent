@@ -1,30 +1,48 @@
 # HL Content — Rediseño del sitio web
 
-Rediseño de [halloleuteproject.com](https://halloleuteproject.com/) — agencia de marca personal de Emilio Pego.
+Rediseño de [halloleuteproject.com](https://halloleuteproject.com/) — agencia de marca
+personal de Emilio Pego. Sitio de una sola página con **scrollytelling**: cada sección se
+anima al deslizar (smooth scroll tipo "mantequilla").
 
-## El proyecto
+## Cómo verlo en local
 
-El sitio actual corre sobre Shopify con el tema Dawn v12 sin personalizar. El objetivo es
-reemplazarlo por una experiencia de **scrollytelling** fluida (smooth scrolling tipo "mantequilla"),
-donde el scroll narra el proceso de producir la marca personal del visitante.
+```bash
+npx -y serve -l 4321 .
+```
+Abre `http://localhost:4321` y desliza despacio.
 
-### Concepto: "El Encuadre"
+## Stack
 
-| Escena | Qué pasa al scrollear |
-|--------|----------------------|
-| 1. La idea en bruto | Hero con retrato desenfocado, como material sin editar |
-| 2. El encuadre | Un visor de cámara se dibuja y la imagen se enfoca (sección pinned) |
-| 3. El guion se escribe | Los servicios aparecen como líneas de guion que se escriben solas |
-| 4. El montaje | Timeline de edición horizontal ensambla los casos de éxito |
-| 5. La comunidad florece | Reacciones y seguidores brotan alrededor del retrato nítido; CTA final |
+- **Lenis** — smooth scroll con inercia
+- **GSAP + ScrollTrigger** — animaciones amarradas al scroll (pin + scrub)
+- HTML/CSS/JS puro, sin build. Librerías por CDN.
+- Mobile-first · respeta `prefers-reduced-motion`
 
-### Stack técnico (propuesto)
+## Las 9 escenas (concepto "El Encuadre")
 
-- **Lenis** — smooth scrolling con inercia
-- **GSAP ScrollTrigger** — animaciones amarradas al scroll (pinning, scrubbing)
-- Mobile-first obligatorio
-- Integración con Shopify (tema custom o headless — por decidir)
+| # | Sección | Animación |
+|---|---------|-----------|
+| 1-2 | El Encuadre (hero) | un "reel" en bruto se enfoca dentro de un visor de cámara |
+| 3 | ¿Qué hacemos? | los 6 pasos del proceso se escriben como un guion |
+| 4 | ¿Quiénes somos? | el texto se revela palabra por palabra |
+| 5 | ¿Clientes? | las profesiones cruzan como clips en un montaje horizontal |
+| 6 | ¿Seguidores? | un contador de vanidad sube, se tacha y da paso al "impacto" |
+| 7 | Costo / CTA | agenda una videollamada sin compromiso |
+| 8 | Recurso gratis | "Mis 5 mejores consejos para crear un video viral" |
+| 9 | Newsletter + footer | suscripción y redes sociales reales |
 
-## Estructura
+## Contenido
 
-_En construcción — prototipo de Escenas 1 y 2 primero._
+Todo el texto proviene del sitio real, verificado con 2 evaluaciones (ver
+[CONTENIDO.md](CONTENIDO.md)). La foto de persona del sitio original se reemplazó por una
+visual abstracta generada con CSS (sin fotos de terceros).
+
+## ⚠️ Pendientes de integración (para conectar antes de publicar)
+
+Los enlaces marcados con `data-todo` en el HTML necesitan datos reales del cliente:
+- **Botón "Agendar ahora"** → URL de agenda (Calendly / WhatsApp / etc.)
+- **Botón "Lo quiero gratis"** → producto de Shopify del lead magnet
+- **Formulario de newsletter** → conectar a Shopify / Mailchimp
+- **Titular del hero** ("Tu marca personal ya existe. Falta enfocarla.") → creación propia,
+  pendiente de aprobación de Nestor.
+- Decidir despliegue final: tema custom de Shopify vs. sitio headless enlazado al checkout.
